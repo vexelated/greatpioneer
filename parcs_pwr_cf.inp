@@ -1,0 +1,1107 @@
+!******************************************************************************
+CASEID parcs_pwr_cf               PWR
+!******************************************************************************
+CNTL
+      testsuite        T
+      core_type        pwr
+      core_power       100
+!
+      search           ppm
+!                         A     B     C     D     S     R    BP
+      bank_pos         142.0 142.0 142.0  142.0 142.0 142.0   142.0
+!
+      depletion        T  1.0E-5 T
+!                           NSET    LADF LXES LJ1F LDED LCHI LCHD LINV LDET LYLD LCDF LGFF LBET LAMB LDEC
+      tree_xs          T     24       T    T    F    F    F    F    T    T    T    F    F    T    T    F
+      th_fdbk          T  F
+      int_th           T  1  paths_pwr_cf.inp
+      xe_sm            1  1
+      XS_EXTRAP        1.5  1.5  1.5  1.5
+      decay_heat       T
+!
+!                    input      iteration  planar                adj
+!                    edit       table      power      pin        reac
+      print_opt      T          T          T          F          T
+!                    fdbk       flux       planar
+!                    rho        precurs    flux       Xe         T/H
+      print_opt      T          F          T          T          T
+!                     oneD       PKRE     Radial     Radial    print
+!                     const     Data     Shape      Shape     harmonic
+      print_opt          F          F       T          T          F
+!
+!
+!******************************************************************************
+!XSEC
+!      group_spec     2  1
+!******************************************************************************
+PARAM
+      n_iters        5  500
+!      nlupd_ss       4  2  1
+      conv_ss        1.0e-6 1.0e-5 5.0e-5 0.001
+      wielandt       0.04    0.1   1.0
+      nodal_kern HYBRID
+      lsolver        1 1 20
+!      cmfd          2
+      decusp         0
+      init_guess     0
+!******************************************************************************
+GEOM
+      geo_dim        17 17 28  2  2   !nasyx,nasyy,nz
+      rad_conf
+      0  0  0  0  0  0 22 22 22 22 22  0  0  0  0  0  0
+      0  0  0  0 22 22 22  7  7  7 22 22 22  0  0  0  0
+      0  0  0 22 22  7  3  2  3  2  3  7 22 22  0  0  0
+      0  0 22 22  7  3  2  3  2  3  2  3  7 22 22  0  0
+      0 22 22  7  6  1  6  1  3  1  6  1  6  7 22 22  0
+      0 22  7  3  2  3  2  3  6  3  2  3  2  3  7 22  0
+     22 22  8  2  6  2  3  2  3  2  3  2  6  2  8 22 22
+     22  7  2  3  2  3  2  3  4  3  2  3  2  3  2  7 22
+     22  7  3  6  8  2  3  8  2  8  3  2  8  6  3  7 22
+     22  7  2  3  2  3  2  3  4  3  2  3  2  3  2  7 22
+     22 22  8  2  6  2  3  2  3  2  3  2  6  2  8 22 22
+      0 22  7  3  2  3  2  3  6  3  2  3  2  3  7 22  0
+      0 22 22  7  6  1  6  1  3  1  6  1  6  7 22 22  0
+      0  0 22 22  7  3  2  3  2  3  2  3  7 22 22  0  0 
+      0  0  0 22 22  7  3  2  3  2  3  7 22 22  0  0  0
+      0  0  0  0 22 22 22  7  7  7 22 22 22  0  0  0  0
+      0  0  0  0  0  0 22 22 22 22 22  0  0  0  0  0  0
+!
+      assy_type      1  2*22 24*1  2*24 FUEL
+      assy_type      2  2*22 24*2  2*24 FUEL
+      assy_type      3  2*22 24*3  2*24 FUEL
+      assy_type      4  2*22 24*4  2*24 FUEL
+      assy_type      5  2*22 24*5  2*24 FUEL
+      assy_type      6  2*22 24*6  2*24 FUEL
+      assy_type      7  2*22 24*7  2*24 FUEL
+      assy_type      8  2*22 24*8  2*24 FUEL
+      assy_type      9  2*22 24*9  2*24 FUEL
+      assy_type     10  2*22 24*10 2*24 FUEL
+      assy_type     11  2*22 24*11 2*24 FUEL
+      assy_type     12  2*22 24*12 2*24 FUEL
+      assy_type     13  2*22 24*13 2*24 FUEL
+      assy_type     14  2*22 24*14 2*24 FUEL
+      assy_type     15  2*22 24*15 2*24 FUEL
+      assy_type     16  2*22 24*16 2*24 FUEL
+      assy_type     17  2*22 24*17 2*24 FUEL
+      assy_type     18  2*22 24*18 2*24 FUEL
+      assy_type     19  2*22 24*19 2*24 FUEL
+      assy_type     20  2*22 24*20 2*24 FUEL
+      assy_type     21  2*22 24*21 2*24 FUEL
+      assy_type     22  2*22 24*23 2*24 REFL
+!
+      grid_x         17*21.504
+      neutmesh_x     17*1
+      grid_y         17*21.504
+      neutmesh_y     17*1
+      grid_z         2*19.05  24*15.24  2*19.05
+      boun_cond      2 2 2 2 2 2       !ibcw,ibce,ibcn,ibcs,ibcb,ibct
+
+
+!
+      cr_axinfo      38.1 2.54
+      bank_conf
+                       0  0  0  0  0
+                 0  0  0  0  0  0  0  0  0
+              0  0  0  1  7  4  7  1  0  0  0
+           0  0  0  7  7  5  7  5  7  7  0  0  0
+        0  0  0  3  7  2  7  6  7  2  7  3  0  0  0
+        0  0  7  7  5  7  0  7  0  7  5  7  7  0  0
+     0  0  1  7  2  7  4  7  3  7  4  7  2  7  1  0  0
+     0  0  7  5  7  0  7  5  7  5  7  0  7  5  7  0  0
+     0  0  4  7  6  7  3  7  6  7  3  7  6  7  4  0  0
+     0  0  7  5  7  0  7  5  7  5  7  0  7  5  7  0  0
+     0  0  1  7  2  7  4  7  3  7  4  7  2  7  1  0  0
+        0  0  7  7  5  7  0  7  0  7  5  7  7  0  0
+        0  0  0  3  7  2  7  6  7  2  7  3  0  0  0
+           0  0  0  7  7  5  7  5  7  7  0  0  0
+              0  0  0  1  7  4  7  1  0  0  0
+                 0  0  0  0  0  0  0  0  0
+                       0  0  0  0  0
+!
+      crb_def        3
+                     1   1       366.0  ! Cd/In/Ag Abso
+                     2 1 2  91.4 366.0  ! Cd/In/Ag with Al2O3 Upper
+                     3   1       366.0  ! Burnable Poison as CR
+!                     {   } These numbers are unique to the pmaxs files CR numbering scheme
+!                           Even though they overlap, PARCS does not know that they have different
+!                           cross sections.
+      crb_type       1 1 1 1 1 2 3
+!                    A B C D S R BP
+!
+!******************************************************************************
+FDBK
+       fa_powpit       15.548   21.50             !assembly power(Mw) and pitch(cm)
+!******************************************************************************
+DEPL
+!      inp_hst        's1c1.dep' 1 1
+       time_stp    10
+!
+      hst_opt        T T T T F
+      out_opt        T T T F F
+!      bank_nr        7*1
+!
+      pmaxs_f         1  './xs_pwr/pwr_fuel_spider.PMAX'  1
+      pmaxs_f         2  './xs_pwr/pwr_fuel_spider.PMAX'  2
+      pmaxs_f         3  './xs_pwr/pwr_fuel_pyrex.PMAX'   3
+      pmaxs_f         4  './xs_pwr/pwr_fuel_spider.PMAX'  4
+      pmaxs_f         5  './xs_pwr/pwr_fuel_spider.PMAX'  5
+      pmaxs_f         6  './xs_pwr/pwr_fuel_pyrex.PMAX'   6
+      pmaxs_f         7  './xs_pwr/pwr_fuel_spider.PMAX'  7
+      pmaxs_f         8  './xs_pwr/pwr_fuel_spider.PMAX'  8
+      pmaxs_f         9  './xs_pwr/pwr_refl_rad.PMAX'     9
+      pmaxs_f        10  './xs_pwr/pwr_refl_rad.PMAX'    10
+      pmaxs_f        11  './xs_pwr/pwr_refl_rad.PMAX'    11
+      pmaxs_f        12  './xs_pwr/pwr_refl_rad.PMAX'    12
+      pmaxs_f        13  './xs_pwr/pwr_refl_rad.PMAX'    13
+      pmaxs_f        14  './xs_pwr/pwr_refl_rad.PMAX'    14
+      pmaxs_f        15  './xs_pwr/pwr_refl_rad.PMAX'    15
+      pmaxs_f        16  './xs_pwr/pwr_refl_rad.PMAX'    16
+      pmaxs_f        17  './xs_pwr/pwr_refl_rad.PMAX'    17
+      pmaxs_f        18  './xs_pwr/pwr_refl_rad.PMAX'    18
+      pmaxs_f        19  './xs_pwr/pwr_refl_rad.PMAX'    19
+      pmaxs_f        20  './xs_pwr/pwr_refl_rad.PMAX'    20
+      pmaxs_f        21  './xs_pwr/pwr_refl_rad.PMAX'    21
+      pmaxs_f        22  './xs_pwr/pwr_refl_bot.PMAX'    22
+      pmaxs_f        23  './xs_pwr/pwr_refl_rad.PMAX'    23
+      pmaxs_f        24  './xs_pwr/pwr_refl_top.PMAX'    24
+!
+!******************************************************************************
+/
+CNTL
+     core_power   100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   2
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power   100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   4
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power   100.0
+       search       ppm
+!
+DEPL
+       hst_opt        T T T T F
+       out_opt        T T T F F
+       inp_hst      'parcs_pwr_cf.dep'   1   6
+       time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power   100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   8
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power   100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   10
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   12
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   14
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   16
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   18
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   20
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   22
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   24
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   26
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   28
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   30
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   32
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   34
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   36
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   38
+     time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+       search       ppm
+!
+DEPL
+       hst_opt        T T T T F
+       out_opt        T T T F F
+       inp_hst      'parcs_pwr_cf.dep'   1   40
+       time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+       search       ppm
+!
+DEPL
+       hst_opt        T T T T F
+       out_opt        T T T F F
+       inp_hst      'parcs_pwr_cf.dep'   1   42
+       time_stp     10
+!******************************************************************************
+/
+CNTL
+     core_power     100.0
+       search       ppm
+!
+DEPL
+       hst_opt        T T T T F
+       out_opt        T T T F F
+       inp_hst      'parcs_pwr_cf.dep'   1   44
+       time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   46
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   48
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   50
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   52
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   54
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   56
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   58
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   60
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   62
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   64
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   66
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   68
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   70
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   72
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   74
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   76
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   78
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   80
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   82
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   84
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   86
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   88
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   90
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   92
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   94
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   96
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   98
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   100
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   102
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   104
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   106
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   108
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   110
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   112
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   114
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   116
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   118
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   120
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   122
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   124
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   126
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   128
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   130
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   132
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   134
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   136
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   138
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   140
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   142
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   144
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   146
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   148
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   150
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   152
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   154
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   156
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   158
+     time_stp     10
+!******************************************************************************
+/
+!ETAPAS SUP 
+CNTL
+     core_power     100.0
+     search       ppm
+!
+DEPL
+     hst_opt        T T T T F
+     out_opt        T T T F F
+     inp_hst      'parcs_pwr_cf.dep'   1   160
+     time_stp     10
+!******************************************************************************
+.
